@@ -1,29 +1,35 @@
 module GHRepo
-  class PushEvent < Event
+  class RepoEvent < Event
+    attribute(:repository, aliases: [:repo]) do |rep|
+      Repository.from_hash(rep) if rep
+    end
+  end
+
+  class PushEvent < RepoEvent
     tag('push')
   end
 
-  class CommitCommentEvent < Event
+  class CommitCommentEvent < RepoEvent
     tag('commit-comment')
   end
 
-  class CreateEvent < Event
+  class CreateEvent < RepoEvent
     tag('create')
   end
 
-  class DeleteEvent < Event
+  class DeleteEvent < RepoEvent
     tag('delete')
   end
 
-  class DeploymentEvent < Event
+  class DeploymentEvent < RepoEvent
     tag('deployment')
   end
 
-  class DownloadEvent < Event
+  class DownloadEvent < RepoEvent
     tag('download')
   end
 
-  class DeploymentStatusEvent < Event
+  class DeploymentStatusEvent < RepoEvent
     tag(reformat('DeploymentStatusEvent'))
   end
 
@@ -31,11 +37,11 @@ module GHRepo
     tag(reformat('FollowEvent'))
   end
 
-  class ForkEvent < Event
+  class ForkEvent < RepoEvent
     tag(reformat('ForkEvent'))
   end
 
-  class ForkApplyEvent < Event
+  class ForkApplyEvent < RepoEvent
     tag(reformat('ForkApplyEvent'))
   end
 
@@ -43,95 +49,95 @@ module GHRepo
     tag(reformat('GistEvent'))
   end
 
-  class GollumEvent < Event
+  class GollumEvent < RepoEvent
     tag(reformat('GollumEvent'))
   end
 
-  class IssueCommentEvent < Event
+  class IssueCommentEvent < RepoEvent
     tag(reformat('IssueCommentEvent'))
   end
 
-  class IssuesEvent < Event
+  class IssuesEvent < RepoEvent
     tag(reformat('IssuesEvent'))
   end
 
-  class LabelEvent < Event
+  class LabelEvent < RepoEvent
     tag(reformat('LabelEvent'))
   end
 
-  class MemberEvent < Event
+  class MemberEvent < RepoEvent
     tag(reformat('MemberEvent'))
   end
 
-  class MembershipEvent < Event
+  class MembershipEvent < RepoEvent
     tag(reformat('MembershipEvent'))
   end
 
-  class MilestoneEvent < Event
+  class MilestoneEvent < RepoEvent
     tag(reformat('MilestoneEvent'))
   end
 
-  class OrganizationEvent < Event
+  class OrganizationEvent < RepoEvent
     tag(reformat('OrganizationEvent'))
   end
 
-  class OrgBlockEvent < Event
+  class OrgBlockEvent < RepoEvent
     tag(reformat('OrgBlockEvent'))
   end
 
-  class PageBuildEvent < Event
+  class PageBuildEvent < RepoEvent
     tag(reformat('PageBuildEvent'))
   end
 
-  class ProjectCardEvent < Event
+  class ProjectCardEvent < RepoEvent
     tag(reformat('ProjectCardEvent'))
   end
 
-  class ProjectColumnEvent < Event
+  class ProjectColumnEvent < RepoEvent
     tag(reformat('ProjectColumnEvent'))
   end
 
-  class ProjectEvent < Event
+  class ProjectEvent < RepoEvent
     tag(reformat('ProjectEvent'))
   end
 
-  class PublicEvent < Event
+  class PublicEvent < RepoEvent
     tag(reformat('PublicEvent'))
   end
 
-  class PullRequestEvent < Event
+  class PullRequestEvent < RepoEvent
     tag(reformat('PullRequestEvent'))
   end
 
-  class PullRequestReviewEvent < Event
+  class PullRequestReviewEvent < RepoEvent
     tag(reformat('PullRequestReviewEvent'))
   end
 
-  class PullRequestReviewCommentEvent < Event
+  class PullRequestReviewCommentEvent < RepoEvent
     tag(reformat('PullRequestReviewCommentEvent'))
   end
 
-  class ReleaseEvent < Event
+  class ReleaseEvent < RepoEvent
     tag(reformat('ReleaseEvent'))
   end
 
-  class RepositoryEvent < Event
+  class RepositoryEvent < RepoEvent
     tag(reformat('RepositoryEvent'))
   end
 
-  class StatusEvent < Event
+  class StatusEvent < RepoEvent
     tag(reformat('StatusEvent'))
   end
 
-  class TeamEvent < Event
+  class TeamEvent < RepoEvent
     tag(reformat('TeamEvent'))
   end
 
-  class TeamAddEvent < Event
+  class TeamAddEvent < RepoEvent
     tag(reformat('TeamAddEvent'))
   end
 
-  class WatchEvent < Event
+  class WatchEvent < RepoEvent
     tag(reformat('WatchEvent'))
   end
 end

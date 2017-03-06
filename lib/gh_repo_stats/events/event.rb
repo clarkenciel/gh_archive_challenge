@@ -13,10 +13,6 @@ module GHRepo
     extend Registrar
     include Builder
 
-    attribute(:repository, aliases: [:repo]) do |rep|
-      Repository.from_hash(rep) if rep
-    end
-
     def initialize(hash)
       build(hash)
     end

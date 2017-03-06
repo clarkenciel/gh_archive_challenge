@@ -42,7 +42,7 @@ module GHRepo
         block, aliases = data.values_at(:block, :aliases)
         key = aliases.empty? ? key : aliases.union([key]).find { |a| hash.has_key?(a) }
 
-        # byebug if key.to_s.start_with?('rep')
+        # byebug if key.nil?
         if block.nil?
           object.send("#{key}=".to_sym, hash[key])
         else

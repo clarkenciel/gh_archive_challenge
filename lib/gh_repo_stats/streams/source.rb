@@ -19,7 +19,7 @@ module GHRepo
 
     def into(sink)
       sink.connect(self)
-      self
+      sink
     end
 
     class Drained < RuntimeError

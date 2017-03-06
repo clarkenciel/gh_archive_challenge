@@ -1,6 +1,6 @@
-#! /usr/bin/env/ruby
+#! /usr/bin/env ruby
 
-require 'gh_repo_stats'
+require_relative '../lib/gh_repo_stats'
 
 opts = GHRepo::OptParser.parse(ARGV)
 GHRepo::Runner.new(

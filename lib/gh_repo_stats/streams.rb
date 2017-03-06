@@ -1,6 +1,7 @@
 module GHRepo
   %w(sink 
     source 
+    reduce
     transform
     async_transform 
     pipe

@@ -4,6 +4,7 @@ require 'json'
 require 'zlib'
 require 'optparse'
 require 'optparse/time'
+require 'set'
 
 
 module GHRepo

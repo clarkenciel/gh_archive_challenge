@@ -7,7 +7,11 @@ module GHRepo
     def pull_all
       output = []
       until @source.drained?
-        output.push(pull)
+        begin
+          output.push(pull)
+        rescue Source::Drained
+          break
+        end
       end
       output
     end

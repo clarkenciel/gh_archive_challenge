@@ -7,4 +7,5 @@ Gem::Specification.new do |s|
   s.email = ['clarkenciel@gmail.com']
   s.files = Dir['Gemfile', 'gh_archive_challenge.gemspec', 'lib/**/*.rb', 'bin/gh_repo_stats']
   s.executables = %w(gh_repo_states)
+  s.summary = 'get repo events from github archive'
 end

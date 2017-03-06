@@ -1,0 +1,12 @@
+#! /usr/bin/env/ruby
+
+require 'gh_repo_stats'
+
+opts = GHRepo::OptParser.parse(ARGV)
+GHRepo::Runner.new(
+  after: opts.after,
+  before: opts.before,
+  event: opts.event,
+  count: opts.count,
+  formatter: opts.formatter
+).run

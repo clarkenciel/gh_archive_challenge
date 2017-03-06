@@ -17,6 +17,11 @@ module GHRepo
       raise(Drained, "#{self.class} is drained!")
     end
 
+    def into(sink)
+      sink.connect(self)
+      self
+    end
+
     class Drained < RuntimeError
     end
   end

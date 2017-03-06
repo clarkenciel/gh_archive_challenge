@@ -39,6 +39,13 @@ RSpec.describe GHRepo::AsyncTransform do
     @sink.connect(@transform)
 
     expect(@sink.pull).to satisfy { |n| [2,3,4].include? n }
-    expect(@transform.pull_all).to satisfy { |ns| ns.all? {|n| [2,3,4].include? n } }
+    expect(@sink.pull_all).to satisfy { |ns| ns.all? {|n| [2,3,4].include? n } }
+  end
+
+  it 'can be transformed' do
+    transform2 = GHRepo::Transform.new { |x| x.to_s }
+    transform2.connect(@transform.connect(@source)).into(@sink)
+    expect(@sink.pull).to satisfy { |n| n.is_a?(String) }
+    expect(@sink.pull_all).to satisfy { |ns| ns.all? { |s| s.is_a?(String) }}
   end
 end

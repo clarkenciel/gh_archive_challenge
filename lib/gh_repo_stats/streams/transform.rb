@@ -9,8 +9,8 @@ module GHRepo
     end
 
     def connect(source)
-      super(source)
       @drained = false
+      super(source)
     end
 
     def work(val)

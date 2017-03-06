@@ -14,6 +14,7 @@ module GHRepo
 
     def connect(source)
       @source = source
+      self
     end
   end
 end

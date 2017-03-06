@@ -30,14 +30,11 @@ module GHRepo
 
     module DSL
       def inherited(sub)
-        concerns.each do |name, p|
-          aliases, block = p.values_at(:aliases, :block)
-          if aliases.empty?
-            sub.attribute(name, &block)
-          else
-            sub.attribute(name, aliases: aliases, &block)
-          end
-        end
+        sub.builds_like(self)
+      end
+
+      def builds_like(otherklass)
+        otherklass.concerns.duplicate_on(self)
       end
 
       ##

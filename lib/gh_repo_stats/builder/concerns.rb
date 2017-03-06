@@ -26,6 +26,17 @@ module GHRepo
       @cs[target][:aliases] = cs_as.union(aliases)
     end
 
+    def duplicate_on(other_klass)
+      @cs.each do |name, p|
+        aliases, block = p.values_at(:aliases, :block)
+        if aliases.empty?
+          other_klass.attribute(name, &block)
+        else
+          other_klass.attribute(name, aliases: aliases, &block)
+        end
+      end
+    end
+
     ##
     # Accepts a target object and an arbitrary hash.
     #
@@ -42,7 +53,6 @@ module GHRepo
         block, aliases = data.values_at(:block, :aliases)
         key = aliases.empty? ? key : aliases.union([key]).find { |a| hash.has_key?(a) }
 
-        # byebug if key.nil?
         if block.nil?
           object.send("#{key}=".to_sym, hash[key])
         else

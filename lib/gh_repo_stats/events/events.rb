@@ -11,6 +11,7 @@ module GHRepo
 
   class CommitCommentEvent < RepoEvent
     tag('commit-comment')
+    builds_like(PushEvent)
   end
 
   class CreateEvent < RepoEvent

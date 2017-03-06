@@ -53,10 +53,12 @@ module GHRepo
         block, aliases = data.values_at(:block, :aliases)
         key = aliases.empty? ? key : aliases.union([key]).find { |a| hash.has_key?(a) }
 
-        if block.nil?
-          object.send("#{key}=".to_sym, hash[key])
-        else
-          object.send("#{key}=".to_sym, block.call(hash[key]))
+        unless key.nil?
+          if block.nil?
+            object.send("#{key}=".to_sym, hash[key])
+          else
+            object.send("#{key}=".to_sym, block.call(hash[key]))
+          end
         end
         object
       end

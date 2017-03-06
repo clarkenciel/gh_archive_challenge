@@ -1,21 +1,23 @@
-class Transform
-  include Source
-  include Sink
+module GHRepo
+  class Transform
+    include Source
+    include Sink
 
-  def initialize(&transform)
-    @transform = transform
+    def initialize(&transform)
+      @transform = transform
+    end
+
+    def work(val)
+      @transform.call(val)
+    end
+
+    def pull
+      work(super)
+    end
+
+    def next_val
+      pull
+    end
   end
 
-  def work(val)
-    @transform.call(val)
-  end
-
-  def pull
-    work(super)
-  end
-
-  def next_val
-    pull
-  end
 end
-

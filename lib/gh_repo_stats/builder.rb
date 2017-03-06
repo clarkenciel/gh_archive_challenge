@@ -1,3 +1,3 @@
 module GHRepo
-  %(concerns builder).each { |fn| require "./builder/#{fn}" }
+  %w(concerns builder).each { |fn| require_relative "./builder/#{fn}" }
 end

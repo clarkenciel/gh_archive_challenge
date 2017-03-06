@@ -1,3 +1,3 @@
 module GHRepo
-  %w(printer base).each { |fn| require "./printers/#{fn}" }
+  %w(printer basic).each { |fn| require_relative "printers/#{fn}" }
 end

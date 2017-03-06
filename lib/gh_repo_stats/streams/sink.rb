@@ -1,18 +1,19 @@
-module Sink
-  def pull
-    @source.next
-  end
-
-  def pull_all
-    output = []
-    until @source.drained?
-      output.push(pull)
+module GHRepo
+  module Sink
+    def pull
+      @source.next
     end
-    output
-  end
 
-  def from(source)
-    @source = source
+    def pull_all
+      output = []
+      until @source.drained?
+        output.push(pull)
+      end
+      output
+    end
+
+    def connect(source)
+      @source = source
+    end
   end
 end
-

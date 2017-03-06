@@ -6,7 +6,7 @@ module GHRepo
       end
     end
 
-    def next_val
+    def next_value
       until val = super
       end
       val

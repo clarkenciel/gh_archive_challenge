@@ -1,31 +1,32 @@
 module GHRepo
+  ##
+  # Transform an input source asynchronously.
+  # DOES NOT PRESERVE ORDER
   class AsyncTransform < Transform
     def initialize(num_workers: 4, &transform)
-      super(transform)
+      super(&transform)
       @output_q = Queue.new
       @num_workers = num_workers
-      @output_reader = ->() do
-        while @output_q.empty?
-          sleep 1
-        end
-        @output_q.pop
-      end
-
-      @output_stream = [@output_reader].lazy.cycle.
-        map(&:call).take_while { !drained? }
 
       @workers = (0...@num_workers).map do |id|
         Thread.new do
           until @source.drained?
-            @output_q.push(pull)
+            @output_q.push(work(@source.next))
           end
           drained!
         end
       end
     end
 
-    def next_val
-      @output_stream.shift
+    def next_value
+      raise_drained! if drained?
+      while @output_q.empty?
+      end
+      @output_q.pop
+    end
+
+    def pull
+      next_value
     end
   end
 end

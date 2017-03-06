@@ -1,12 +1,6 @@
 require_relative '../spec_helper.rb'
 
 RSpec.describe GHRepo::Sink do
-  before :all do
-    class Consumer
-      include GHRepo::Sink
-    end
-  end
-
   before :each do
     @source = Stack.new
     @sink = Consumer.new

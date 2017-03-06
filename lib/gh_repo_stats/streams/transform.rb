@@ -5,6 +5,12 @@ module GHRepo
 
     def initialize(&transform)
       @transform = transform
+      drained!
+    end
+
+    def connect(source)
+      super(source)
+      @drained = false
     end
 
     def work(val)
@@ -12,12 +18,14 @@ module GHRepo
     end
 
     def pull
-      work(super)
+      val = work(super)
+      drained! if @source.drained?
+      val
     end
 
-    def next_val
+    def next_value
+      raise_drained! if drained?
       pull
     end
   end
-
 end

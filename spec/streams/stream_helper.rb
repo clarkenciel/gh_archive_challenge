@@ -14,3 +14,7 @@ class Stack
     val
   end
 end
+
+class Consumer
+  include GHRepo::Sink
+end

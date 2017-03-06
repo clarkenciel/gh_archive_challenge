@@ -1,11 +1,8 @@
 module GHRepo
   module Source
     def next
-      if drained?
-        raise(Drained, "#{self.class} is drained!")
-      else
-        next_value
-      end
+      raise_drained! if drained?
+      next_value
     end
 
     def drained!
@@ -14,6 +11,10 @@ module GHRepo
 
     def drained?
       @drained ||= false
+    end
+
+    def raise_drained!
+      raise(Drained, "#{self.class} is drained!")
     end
 
     class Drained < RuntimeError
